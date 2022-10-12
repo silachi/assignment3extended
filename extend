@@ -1,0 +1,342 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Assignment_3
+{
+    public class Student
+    {
+        private string name;
+        private string city;
+        private double gpa;
+        private double avgMarks;
+
+
+        //  Constructor will be used to set values of name, city and gpa
+        public Student(string name, string city, double gpa)
+        {
+            this.name = name;
+            this.city = city;
+            this.gpa = gpa;
+
+        }
+
+        // overloading
+        public Student(string name, string city, double gpa, double avgMarks)
+        {
+            this.name = name;
+            this.city = city;
+            this.gpa = gpa;
+            this.avgMarks = avgMarks;
+        }
+        // get will be used to get value of names, city and gpa out of this class
+        public string Name
+        {
+            get { return name; }
+        }
+        public string City
+        {
+            get { return city; }
+        }
+        public double Gpa
+        {
+            get { return gpa; }
+        }
+        public double AvgMarks
+        {
+            get { return avgMarks; }
+            set { avgMarks = value; }
+        }
+    }
+    
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Reflection;
+using System.Security.Cryptography.X509Certificates;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Assignment_3
+{   
+   
+    internal class Program
+    {
+
+        static void Main(string[] args)
+        {
+      
+
+
+             // 01
+            List<Student> students = new List<Student>();
+            Student studObj = new Student("Umar", "Rawalpindi", 3.85);
+            students.Add(studObj);
+
+            // 02
+            studObj = new Student("Hussain", "Lahore", 3);
+            students.Add(studObj);
+
+            // 03
+            studObj = new Student("Hisham", "Lahore", 3.5);
+            students.Add(studObj);
+
+            // 04
+            studObj = new Student("Rauf", "Rawalpindi", 2.9);
+            students.Add(studObj);
+
+            // 05
+            studObj = new Student("Hamza", "Quetta", 3.2);
+            students.Add(studObj);
+
+            // 06
+            studObj = new Student("Fahad", "Multan", 2.5);
+            students.Add(studObj);
+
+            // 07
+            studObj = new Student("Talha", "Quetta", 3.3);
+            students.Add(studObj);
+
+            // 08
+            studObj = new Student("Razzaq", "Lahore", 2.6);
+            students.Add(studObj);
+
+            // 09
+            studObj = new Student("Zaheer", "Rawalpindi", 2.7);
+            students.Add(studObj);
+
+            // 10
+            studObj = new Student("Ahmed", "Lahore", 3.5);
+            students.Add(studObj);
+
+            // 11
+            studObj = new Student("Asif", "Rawalpindi", 3.8);
+            students.Add(studObj);
+
+            // 12
+            studObj = new Student("Amir", "Rawalpindi", 2.7);
+            students.Add(studObj);
+
+            // 13
+            studObj = new Student("Kashif", "Multan", 4);
+            students.Add(studObj);
+
+            // 14
+            studObj = new Student("Hafeez", "Lahore", 3.44);
+            students.Add(studObj);
+
+            // 15
+            studObj = new Student("Khalil", "Lahore", 3.2);
+            students.Add(studObj);
+            
+            //  A dictionary created to store data in it, later on it will given constant runtime
+            //  A list will be stored for each keyvalue
+            Dictionary <string,List<Student>> mydict = new Dictionary<string,List<Student>>();
+
+            //  A list with name of cities used by students created to organize the data 
+            List<string> cities = new List<string>() { "Lahore", "Rawalpindi", "Quetta", "Multan" };
+
+           //  studentAbove will store the data of students having GPA greter than equal to 3 for given city taken from list of cities
+            List<Student> studentAbove = new List<Student>();
+
+            //  studentAbove will store the data of students having GPA less than 3 for given city taken from list of cities
+            List<Student> studentBelow = new List<Student>();
+
+            //  To grtOrLess3 will help to make key value which will contcatenate city name and <3 or city name and >3
+            //  It will to organize date with particular name of keyvalue
+            List<String> grtOrLess3 = new List<string>() { "> 3","< 3" };
+
+            List<String> grtOrLess90 = new List<string>() { " >= 90", "  <= 90" };
+
+            //  Creating two list avgListGreat will store student with marks>= 3 and avg project marks >=90
+            //  Creating two list avgListLess will store student with marks<= 3 and avg project marks >=90
+            List<Student> avgListGreat = new List<Student>();
+            List<Student> avgListLess = new List<Student>();
+
+            //  printing stored data in the list
+            Console.WriteLine("----------------------------Task 01----------------------");
+            Console.WriteLine("Name" + "\t  \t" + "City" + "  \t \t \t" + "GPA");
+            foreach (var item in students)
+            {
+                Console.WriteLine(item.Name + "\t  \t" + item.City + "  \t \t" + item.Gpa);
+            }
+
+            
+            //  Nested for and if statement used to store the data taken from list in a such way that 
+            //  after each inner loop list is stored for given city and >3 in studenAbove, which is passed to keyvalue concatenated by adding string cityname and string ">3"
+            //  similarly it was done for studentBelow
+            //  studentAbove and studentBelow, for these names address was changed, as old address was given to dictionary
+            for (int i = 0; i < cities.Count; i++)
+            {
+                for (int z = 0; z < students.Count; z++)
+                {
+
+                      if (students[z].City == cities[i] && students[z].Gpa >=3)
+                    {
+                        studentAbove.Add(students[z]);
+                        
+                    }
+                     else  if(students[z].City == cities[i] && students[z].Gpa < 3)
+                    {
+                        studentBelow.Add(students[z]);
+                      
+                    }
+                    
+                }
+                
+
+                mydict.Add(cities[i] + grtOrLess3[0], studentAbove);
+                mydict.Add(cities[i] + grtOrLess3[1], studentBelow);
+                studentAbove = new List<Student>();
+                studentBelow = new List<Student>();
+
+            }
+
+
+            //  commmented code can be used to print all data from dictionary in sorted way
+            //  for (int i = 0; i<cities.Count ; i++)
+            //  {
+            //      for (int z = 0; z < grtOrLess3.Count; z++)
+            //      {
+            //          foreach (var index in mydict[cities[i]+grtOrLess3[z]])
+            //          {
+            //              Console.WriteLine(index.Name + "\t" + index.City + "\t" + index.Gpa);
+            //          }
+            //      }
+            //  }
+
+         
+
+            // Task 2
+            Console.WriteLine("----------------------------Task 02----------------------");
+
+            //  printed the names of students whose gpa is greater than or equal to 3 for each city using for and forach
+            //  "> 3" is concatinated with cityname and given as key in foreach it will give list of candidate for that city with gpa > 3
+            //  "> 3" and "< 3" was stored in grtorLess3 string so index will be assigned to get them
+            
+            for (int i = 0; i < cities.Count; i++)
+            {
+               
+                    foreach (var index in mydict[cities[i] + grtOrLess3[0]])
+                    {
+                        Console.WriteLine(index.Name + "\t \t" + index.City + "  \t \t" + index.Gpa);
+                    }
+                
+            }
+
+            // Task 3 and Task 4
+            Console.WriteLine("----------------------------Task 03----------------------");
+            Console.WriteLine("Name" + "\t  \t" + "City" + "  \t \t \t" + "GPA");
+            double marksAssign1, marksAssign2, avgMarks;
+           
+                     
+            int j = 0;
+            int k = 0;
+            for (int i = 0; i < cities.Count; i++)
+            {
+
+                foreach (var index in mydict[cities[i] + grtOrLess3[0]])
+                {
+             
+                    Console.WriteLine("\n"+index.Name + "\t \t" + index.City + "  \t \t" + index.Gpa);
+                    Console.Write("\n Kindly enter marks of Assignment 1 = ");
+                    marksAssign1 = Convert.ToDouble(Console.ReadLine());
+                    Console.Write(" Kindly enter marks of Assignment 2 = ");
+                    marksAssign2 = Convert.ToDouble(Console.ReadLine());
+                    Console.WriteLine("_______________________________________________________");
+                    avgMarks = ((marksAssign1 + marksAssign2) / 2);
+                    if (avgMarks >= 90)
+                    {
+                       
+                       
+                        // hussain will it work i obj ko overwrite karein
+                        studObj = new Student(index.Name, index.City, index.Gpa, avgMarks);
+                        avgListGreat.Add(studObj);
+                        j++;
+                    }
+                    else
+                    {
+                        //students[j].AvgMarks = studObj.AvgMarks;
+                       
+                        studObj = new Student(index.Name, index.City, index.Gpa, avgMarks);
+                        avgListLess.Add(studObj);
+                        k++;
+                    }
+                }
+            }
+                    mydict.Add(grtOrLess90[0], avgListGreat);
+                    mydict.Add(grtOrLess90[1], avgListLess);
+                  
+                    Console.WriteLine("\n\nStudents whose marks are greater than or equal to 90");
+
+                    Console.WriteLine("----------------------------Task 04----------------------");
+                    foreach (var index in mydict[grtOrLess90[0]])
+            {
+                Console.WriteLine(index.Name + "\t" + index.City + "\t" + index.Gpa + "\t" + index.AvgMarks);
+            }
+
+      
+
+                     // Task 5
+                     // Lahore = cities [0]
+                     // Rawalpindi = cities[1]
+                     // Quetta = cities [2]
+                     // Multan = cities[3]
+
+                Console.WriteLine("----------------------------Task 05----------------------");
+                    
+                for (int z = 0; z < grtOrLess3.Count; z++)
+                {
+                    foreach (var index in mydict[cities[1] + grtOrLess3[z]])
+                    {
+                        Console.WriteLine(index.Name + "\t" + index.City + "\t" + index.Gpa);
+                    }
+                }
+            
+
+            Console.ReadLine();
+
+        }
+    }
+}
+
+
